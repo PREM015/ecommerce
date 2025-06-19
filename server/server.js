@@ -9,32 +9,30 @@ import connectDB from './config/db.js';
 import authRoutes from './routes/auth.js';
 import productRoutes from './routes/product.js';
 
-// ✅ Load environment variables
 dotenv.config();
-
-// ✅ Connect to MongoDB
 connectDB();
 
-// ✅ Initialize Express app
 const app = express();
+const __dirname = path.resolve();
 
-// ✅ Middleware
+// Middleware
 app.use(cors({ origin: process.env.CLIENT_URL || '*', credentials: true }));
 app.use(express.json());
 
-// ✅ API Routes
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 
-// ✅ Serve Vite React frontend (from dist folder)
-const __dirname = path.resolve();
-app.use(express.static(path.join(__dirname, 'client', 'dist')));
+// Static Frontend (Vite)
+const frontendPath = path.join(__dirname, 'client', 'dist');
+app.use(express.static(frontendPath));
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
-});
+// // FIXED: Use '/*' not '*'
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(client, 'index.html'));
+// });
 
-// ✅ Start the server
+// Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
