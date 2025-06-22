@@ -1,42 +1,36 @@
-/// ===============================
-/// ✅ 1. client/src/App.jsx
-/// ===============================
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom'
-import { useState } from 'react'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import Dashboard from './pages/Dashboard'
+import Home from "./pages/Home";
+import Navbar from "./components/Navbar";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Cart from "./pages/Cart";
+import Dashboard from "./pages/Dashboard";  
+import MainLayout from "./layout/MainLayout";
+import PrivateRoute from "./components/PrivateRoute"; // Import your PrivateRoute component
 
 function App() {
-  const [user, setUser] = useState(() => {
-    const saved = localStorage.getItem('user')
-    return saved ? JSON.parse(saved) : null
-  })
-
-  const handleLogout = () => {
-    setUser(null)
-    localStorage.removeItem('user')
-    localStorage.removeItem('token')
-  }
-
   return (
-    <Router>
-      <nav style={{ display: 'flex', gap: '1rem', marginBottom: '20px' }}>
-        {!user && <Link to="/login">🔑 Login</Link>}
-        {!user && <Link to="/register">📝 Register</Link>}
-        {user && <Link to="/dashboard">📊 Dashboard</Link>}
-        {user && <button onClick={handleLogout}>🚪 Logout</button>}
-      </nav>
-
-      <Routes>
-        <Route path="/login" element={<Login setUser={setUser} />} />
-        <Route path="/register" element={<Register setUser={setUser} />} />
-        <Route path="/dashboard" element={user ? <Dashboard user={user} /> : <Navigate to="/login" />} />
-        <Route path="*" element={<Navigate to="/login" />} />
-      </Routes>
-    </Router>
-  )
+    <BrowserRouter>
+      <Navbar />
+      <MainLayout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          />
+        </Routes>
+      </MainLayout>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
