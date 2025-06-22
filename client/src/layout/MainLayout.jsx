@@ -1,9 +1,13 @@
-const MainLayout = ({ children }) => (
-  <div className="min-h-screen w-full bg-zinc-700 text-white overflow-x-hidden">
-    <main className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+import React from "react";
+import Navbar from "../components/Navbar";
+
+function MainLayout({ children }) {
+  return (
+    <div className="bg-gray-100 min-h-screen">
+      <Navbar />
       {children}
-    </main>
-  </div>
-);
+    </div>
+  );
+}
 
 export default MainLayout;

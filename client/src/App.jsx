@@ -1,18 +1,15 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Home from "./pages/Home";
-import Navbar from "./components/Navbar";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
-import Dashboard from "./pages/Dashboard";  
+import Dashboard from "./pages/Dashboard";
 import MainLayout from "./layout/MainLayout";
-import PrivateRoute from "./components/PrivateRoute"; // Import your PrivateRoute component
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
       <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
