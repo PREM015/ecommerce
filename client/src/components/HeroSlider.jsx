@@ -26,7 +26,7 @@ function HeroSlider() {
           <SwiperSlide key={i}>
             <img
               src={src}
-              alt={`Slide ${i}`}
+              alt=""
               className="w-full h-full object-cover"
             />
           </SwiperSlide>
