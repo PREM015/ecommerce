@@ -1,0 +1,1 @@
+export const filterOptions = ['Price: Low to High', 'Newest'];
