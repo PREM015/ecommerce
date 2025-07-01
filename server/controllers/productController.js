@@ -93,9 +93,47 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 - getFilteredProducts(req, res)
   🧠 Use query params to filter by:
     - category, minPrice, maxPrice, brand, rating, etc.
-    - Support sort by price/date/name
+  
     - Example: ?category=phones&minPrice=1000&maxPrice=20000&sort=price_asc&page=2&limit=20
 */
+// ✅ FILTER PRODUCTS (with category, price range, brand, rating)
+export const getFilteredProducts = asyncHandler(async (req, res) => {
+    const { category, minPrice, maxPrice, brand, rating } = req.query;
+
+    // 🧠 Dynamically build filter object
+    const filter = {};
+
+    if (category) filter.category = category;
+    if (brand) filter.brand = brand;
+    if (rating) filter.rating = { $gte: Number(rating) };
+
+    if (minPrice || maxPrice) {
+        filter.price = {};
+        if (minPrice) filter.price.$gte = Number(minPrice);
+        if (maxPrice) filter.price.$lte = Number(maxPrice);
+    }
+
+    // 🔍 Query DB using filter
+    const products = await Product.find(filter);
+
+    res.json(products);
+});
+const sortField = req.query.sortBy || 'createdAt'; // or 'price', 'name'
+const sortOrder = req.query.order === 'desc' ? -1 : 1;
+
+const products = await Product.find(filter).sort({ [sortField]: sortOrder });
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*
 🔍 3. Search Functionality
