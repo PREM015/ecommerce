@@ -9,19 +9,19 @@ const offers = [
   {
     title: "Big Electronics Sale",
     description: "Up to 50% off on top electronics. Grab the best deals today!",
-    image: "/images/electronics-banner.png",
+    image: "/images/banners/electronics-banner.png",
     link: "/products/electronics",
   },
   {
     title: "Fashion Fiesta",
     description: "Trendy styles at unbeatable prices. New arrivals just for you!",
-    image: "/images/fashion-banner.png",
+    image: "/images/banners/fashion-banner.png",
     link: "/products/clothing",
   },
   {
     title: "Kitchen Essentials",
     description: "Upgrade your kitchen with premium appliances and tools.",
-    image: "/images/kitchen-banner.png",
+    image: "/images/banners/kitchen-banner.png",
     link: "/products/home-kitchen",
   },
 ];
