@@ -1,84 +1,121 @@
 "use client";
+
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, X } from "lucide-react";
+import {
+  ShoppingCart,
+  Menu,
+  X,
+  User,
+  Search,
+} from "lucide-react";
 
 const categories = [
-  { label: "Mobiles", image: "/icons/mobiles.png", href: "/product" },
-  { label: "Fashion", image: "/icons/fashion.png", href: "/product" },
-  { label: "Electronics", image: "/icons/electronics.png", href: "/product" },
-  { label: "Furniture", image: "/icons/furniture.png", href: "/product" },
-  { label: "Appliances", image: "/icons/tv.png", href: "/product" },
-  { label: "Beauty & Grocery", image: "/icons/beauty.png", href: "/product" },
+  "Mobiles",
+  "Clothing",
+  "Electronics",
+  "Furniture",
+  "Home & Kitchen",
+  "Grocery",
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md border-b">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b shadow-md">
       {/* Top Bar */}
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link href="/" className="text-3xl font-extrabold text-blue-700 tracking-wide">
-          Bhaarat<span className="text-yellow-500">Cart</span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image
+            src="/images/BharatCart Logo.png"
+            alt="BharatCart Logo"
+            width={42}
+            height={42}
+            priority
+          />
+          <span className="text-2xl font-bold text-gray-900">
+            Bharat<span className="text-blue-600">Cart</span>
+          </span>
         </Link>
 
-        {/* Search Bar */}
-        <div className="hidden md:flex flex-1 justify-center">
-          <input
-            type="text"
-            placeholder="Search for products, brands, categories..."
-            className="w-[420px] px-5 py-2 rounded-full border border-gray-300 bg-gray-50 shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
-          />
-        </div>
-
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
-          <Link href="/(auth)/login" className="hover:text-blue-600 transition">Login</Link>
-          <Link href="/cart" className="hover:text-blue-600 transition flex items-center gap-1">🛒 Cart</Link>
-          <Link href="/admin" className="hover:text-blue-600 transition">Admin</Link>
-        </div>
+        <nav className="hidden md:flex items-center gap-6 text-slate-700 text-sm font-semibold">
+          <Link
+            href="/(auth)/login"
+            className="flex items-center gap-1 hover:text-blue-600 transition-colors"
+          >
+            <User size={20} /> Login
+          </Link>
+          <Link
+            href="/cart"
+            className="flex items-center gap-1 hover:text-blue-600 transition-colors"
+          >
+            <ShoppingCart size={20} /> Cart
+          </Link>
+        </nav>
 
         {/* Mobile Menu Toggle */}
-        <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        <button
+          aria-label="Toggle Menu"
+          className="md:hidden text-slate-700 hover:text-blue-600"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <X size={26} /> : <Menu size={26} />}
         </button>
       </div>
 
-      {/* Mobile Dropdown */}
-      {menuOpen && (
-        <div className="md:hidden px-6 pb-4 pt-2 space-y-2 text-sm text-gray-700 bg-white border-t shadow-sm">
-          <Link href="/(auth)/login" className="block hover:text-blue-600">Login</Link>
-          <Link href="/cart" className="block hover:text-blue-600">Cart</Link>
-          <Link href="/admin" className="block hover:text-blue-600">Admin</Link>
+      {/* Search Bar */}
+      <div className="bg-gradient-to-r from-white via-slate-50 to-white py-3 border-y">
+        <div className="max-w-7xl mx-auto px-6 relative">
+          <Search
+            className="absolute mx-4 my-2.5 text-gray-400"
+            size={18}
+            aria-hidden="true"
+          />
+          <input
+            type="text"
+            placeholder="Search for products, brands, categories..."
+            className="w-full pl-14 pr-4 py-2 rounded-lg border border-slate-300 text-sm shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900"
+            aria-label="Search products"
+          />
         </div>
-      )}
+      </div>
 
-      {/* Category Pills */}
-      <div className="overflow-x-auto border-t bg-white">
-        <div className="max-w-6xl mx-auto flex items-center justify-center gap-4 px-4 py-3">
-          {categories.map((cat) => (
+      {/* Categories Row */}
+      <div className="bg-white border-b overflow-x-auto hide-scrollbar">
+        <div className="max-w-7xl mx-auto px-6 py-3 flex gap-3">
+          {categories.map((category, idx) => (
             <Link
-              key={cat.label}
-              href={cat.href}
-              className="group flex flex-col items-center justify-center px-4 py-2 rounded-full bg-gray-100 hover:bg-blue-50 transition-all duration-200 shadow-sm"
+              key={idx}
+              href="/product"
+              className="px-4 py-1.5 whitespace-nowrap rounded-full text-sm font-medium text-gray-700 bg-slate-100 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white transition-all duration-200 shadow-sm"
             >
-              <Image
-                src={cat.image}
-                alt={cat.label}
-                width={36}
-                height={36}
-                className="mb-1 transition-transform group-hover:scale-110"
-              />
-              <span className="text-xs font-medium text-gray-700 group-hover:text-blue-600">
-                {cat.label}
-              </span>
+              {category}
             </Link>
           ))}
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-white border-t px-6 py-4 space-y-4 text-gray-800 font-medium shadow-lg">
+          <Link
+            href="/(auth)/login"
+            className="block flex items-center gap-2 hover:text-blue-600"
+          >
+            <User size={18} /> Login
+          </Link>
+          <Link
+            href="/cart"
+            className="block flex items-center gap-2 hover:text-blue-600"
+          >
+            <ShoppingCart size={18} /> Cart
+          </Link>
+        </div>
+      )}
     </header>
   );
 };
