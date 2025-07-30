@@ -1,4 +1,3 @@
-// src/app/layout.tsx
 import React from 'react';
 import './globals.css';
 import type { Metadata } from 'next';
@@ -15,6 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/bhaaratcart-logo.ico" type="image/x-icon" />
+      </head>
       <body>{children}</body>
     </html>
   );
