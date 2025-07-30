@@ -1,1 +1,1 @@
-// Spinner.tsx
+// Spinner.tsx placeholder

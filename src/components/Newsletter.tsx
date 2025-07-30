@@ -1,1 +1,0 @@
-// Newsletter.tsx placeholder

@@ -1,4 +1,4 @@
-"use client";
+// Footer.tsx placeholder
 import React from 'react'
 
 function Footer() {

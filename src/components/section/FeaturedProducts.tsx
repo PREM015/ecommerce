@@ -1,1 +1,1 @@
-// FeaturedProducts.tsx
+// FeaturedProducts.tsx placeholder

@@ -1,1 +1,1 @@
-// NewArrivals.tsx
+// NewArrivals.tsx placeholder

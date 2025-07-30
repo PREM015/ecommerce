@@ -1,1 +1,1 @@
-// Newsletter.tsx
+// Newsletter.tsx placeholder

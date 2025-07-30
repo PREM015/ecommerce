@@ -1,1 +1,1 @@
-// BrandsShowcase.tsx
+// BrandsShowcase.tsx placeholder

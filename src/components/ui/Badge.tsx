@@ -1,1 +1,1 @@
-// Badge.tsx
+// Badge.tsx placeholder

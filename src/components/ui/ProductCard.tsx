@@ -1,1 +1,1 @@
-// ProductCard.tsx
+// ProductCard.tsx placeholder

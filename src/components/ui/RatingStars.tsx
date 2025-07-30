@@ -1,1 +1,1 @@
-// RatingStars.tsx
+// RatingStars.tsx placeholder

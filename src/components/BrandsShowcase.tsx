@@ -1,1 +1,0 @@
-// BrandsShowcase.tsx placeholder

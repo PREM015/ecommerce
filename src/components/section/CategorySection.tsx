@@ -1,1 +1,1 @@
-// CategorySection.tsx
+// CategorySection.tsx placeholder
