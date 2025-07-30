@@ -1,20 +1,21 @@
-// src/app/page.tsx
-"use client"
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import Herosection from "@/components/section/Herosection";
+import CategorySection from "@/components/section/CategorySection";
 
 export default function Home() {
   return (
-     <main className="w-full">
-      {/* ✅ Only sections here */}
+    <main className="w-full">
+      {/* ✅ Hero Section */}
       <section id="home">
         <Herosection />
       </section>
 
-      {/* ❌ DO NOT include <AboutPage /> here! */}
-
-      
+      {/* ✅ Category Section */}
+      <section id="categories">
+        <CategorySection />
+      </section>
     </main>
   );
 }
