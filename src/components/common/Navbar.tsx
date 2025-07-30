@@ -1,4 +1,3 @@
-// Navbar.tsx placeholder
 "use client";
 import React, { useState } from "react";
 import Link from "next/link";
@@ -6,48 +5,43 @@ import Image from "next/image";
 import { Menu, X } from "lucide-react";
 
 const categories = [
-  { label: "Minutes", image: "/icons/minutes.png", href: "/minutes" },
-  { label: "Mobiles & Tablets", image: "/icons/mobiles.png", href: "/categories/mobiles" },
-  { label: "Fashion", image: "/icons/fashion.png", href: "/categories/fashion" },
-  { label: "Electronics", image: "/icons/electronics.png", href: "/categories/electronics" },
-  { label: "Home & Furniture", image: "/icons/furniture.png", href: "/categories/furniture" },
-  { label: "TVs & Appliances", image: "/icons/tv.png", href: "/categories/appliances" },
-  { label: "Flight Bookings", image: "/icons/flight.png", href: "/categories/flights" },
-  { label: "Beauty, Food..", image: "/icons/beauty.png", href: "/categories/beauty" },
-  { label: "Grocery", image: "/icons/grocery.png", href: "/categories/grocery" },
+  { label: "Mobiles", image: "/icons/mobiles.png", href: "/product" },
+  { label: "Fashion", image: "/icons/fashion.png", href: "/product" },
+  { label: "Electronics", image: "/icons/electronics.png", href: "/product" },
+  { label: "Furniture", image: "/icons/furniture.png", href: "/product" },
+  { label: "Appliances", image: "/icons/tv.png", href: "/product" },
+  { label: "Beauty & Grocery", image: "/icons/beauty.png", href: "/product" },
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 bg-white shadow-md border-b">
       {/* Top Bar */}
-      <div className="max-w-7xl mx-auto flex items-center justify-between px-4 py-3">
-        {/* Left Side: Logo + Search */}
-        <div className="flex items-center gap-6">
-          <Link href="/" className="text-2xl font-bold text-blue-700">
-            Bhaarat<span className="text-yellow-500">Cart</span>
-          </Link>
+      <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
+        {/* Logo */}
+        <Link href="/" className="text-3xl font-extrabold text-blue-700 tracking-wide">
+          Bhaarat<span className="text-yellow-500">Cart</span>
+        </Link>
 
-          {/* Search Bar */}
-          <div className="hidden md:block">
-            <input
-              type="text"
-              placeholder="Search for Products, Brands and More"
-              className="w-[400px] px-4 py-2 border border-gray-300 rounded-md bg-blue-50 focus:outline-blue-500 text-sm"
-            />
-          </div>
+        {/* Search Bar */}
+        <div className="hidden md:flex flex-1 justify-center">
+          <input
+            type="text"
+            placeholder="Search for products, brands, categories..."
+            className="w-[420px] px-5 py-2 rounded-full border border-gray-300 bg-gray-50 shadow-inner focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+          />
         </div>
 
-        {/* Right Side Links */}
+        {/* Desktop Links */}
         <div className="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
-          <Link href="/login" className="hover:text-blue-600">Login</Link>
-          <Link href="/cart" className="hover:text-blue-600 flex items-center gap-1">🛒 Cart</Link>
-          <Link href="/seller" className="hover:text-blue-600">Become a Seller</Link>
+          <Link href="/(auth)/login" className="hover:text-blue-600 transition">Login</Link>
+          <Link href="/cart" className="hover:text-blue-600 transition flex items-center gap-1">🛒 Cart</Link>
+          <Link href="/admin" className="hover:text-blue-600 transition">Admin</Link>
         </div>
 
-        {/* Mobile Hamburger */}
+        {/* Mobile Menu Toggle */}
         <button className="md:hidden" onClick={() => setMenuOpen(!menuOpen)}>
           {menuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -55,30 +49,32 @@ const Navbar = () => {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="md:hidden px-4 pb-4 pt-2 space-y-2 text-sm border-t text-gray-700 bg-white shadow-sm">
-          <Link href="/login" className="block hover:text-blue-600">Login</Link>
+        <div className="md:hidden px-6 pb-4 pt-2 space-y-2 text-sm text-gray-700 bg-white border-t shadow-sm">
+          <Link href="/(auth)/login" className="block hover:text-blue-600">Login</Link>
           <Link href="/cart" className="block hover:text-blue-600">Cart</Link>
-          <Link href="/seller" className="block hover:text-blue-600">Become a Seller</Link>
+          <Link href="/admin" className="block hover:text-blue-600">Admin</Link>
         </div>
       )}
 
-      {/* Category Scroll Bar */}
-      <div className="overflow-x-auto whitespace-nowrap border-t border-gray-100 py-2 bg-gray-50">
-        <div className="max-w-7xl mx-auto flex gap-6 px-4">
+      {/* Category Pills */}
+      <div className="overflow-x-auto border-t bg-white">
+        <div className="max-w-6xl mx-auto flex items-center justify-center gap-4 px-4 py-3">
           {categories.map((cat) => (
             <Link
               key={cat.label}
               href={cat.href}
-              className="flex flex-col items-center justify-center text-xs text-gray-700 hover:text-blue-600 transition-all duration-150"
+              className="group flex flex-col items-center justify-center px-4 py-2 rounded-full bg-gray-100 hover:bg-blue-50 transition-all duration-200 shadow-sm"
             >
               <Image
                 src={cat.image}
                 alt={cat.label}
-                width={40}
-                height={40}
-                className="mb-1 object-contain"
+                width={36}
+                height={36}
+                className="mb-1 transition-transform group-hover:scale-110"
               />
-              <span className="text-center leading-tight">{cat.label}</span>
+              <span className="text-xs font-medium text-gray-700 group-hover:text-blue-600">
+                {cat.label}
+              </span>
             </Link>
           ))}
         </div>
