@@ -1,0 +1,1 @@
+// CategorySection.tsx placeholder

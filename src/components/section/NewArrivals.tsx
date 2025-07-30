@@ -1,0 +1,1 @@
+// NewArrivals.tsx

@@ -1,1 +1,1 @@
-// useAuth.ts
+// useAuth.ts placeholder

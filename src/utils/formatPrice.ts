@@ -1,1 +1,1 @@
-// formatPrice.ts
+// formatPrice.ts placeholder

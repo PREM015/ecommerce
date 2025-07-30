@@ -1,0 +1,1 @@
+// getAverageRating.ts placeholder
