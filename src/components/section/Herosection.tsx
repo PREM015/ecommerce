@@ -39,9 +39,11 @@ export default function Herosection() {
   const current = offers[index];
 
   return (
-    <section className="relative w-full py-16 px-4 sm:px-6 md:px-10 overflow-hidden bg-gradient-to-br from-indigo-50 via-white to-blue-100">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10 relative z-10">
+    <section className="relative w-full py-24 px-6 md:px-12 bg-gradient-to-br from-indigo-100 via-white to-blue-50 overflow-hidden">
+      {/* Glow Effect */}
+      <div className="absolute w-[30rem] h-[30rem] bg-purple-300 rounded-full blur-3xl opacity-30 -top-24 -left-20 z-0" />
 
+      <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
         {/* Text Content */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -52,22 +54,22 @@ export default function Herosection() {
             transition={{ duration: 0.6, ease: "easeInOut" }}
             className="text-center md:text-left md:w-1/2"
           >
-            <h1 className="text-gray-900 font-extrabold leading-tight tracking-tight text-[clamp(2rem,6vw,3.5rem)] mb-4">
+            <h1 className="text-gray-900 font-black leading-tight text-[clamp(2.5rem,6vw,4rem)] mb-6">
               {current.title}
             </h1>
-            <p className="text-gray-700 text-base sm:text-lg md:text-xl mb-6 max-w-xl mx-auto md:mx-0">
+            <p className="text-gray-700 text-lg md:text-xl mb-8 max-w-xl mx-auto md:mx-0">
               {current.description}
             </p>
             <Link
               href={current.link}
-              className="inline-block bg-indigo-600 text-white font-semibold text-base sm:text-lg py-3 px-6 rounded-lg shadow-md hover:bg-indigo-700 transition"
+              className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-medium text-lg py-3 px-7 rounded-xl shadow-lg transition-all"
             >
-              Shop Now
+              Shop Now →
             </Link>
           </motion.div>
         </AnimatePresence>
 
-        {/* Image */}
+        {/* Image Content */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`image-${index}`}
@@ -75,27 +77,24 @@ export default function Herosection() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 1.05 }}
             transition={{ duration: 0.7, ease: "easeInOut" }}
-            className="w-full md:w-1/2 relative"
+            className="w-full md:w-1/2"
           >
-            <div className="relative rounded-3xl overflow-hidden shadow-xl border border-gray-200 bg-white p-2 sm:p-4">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-gray-200 bg-white p-3">
               <Image
                 src={current.image}
                 alt={current.title}
-                width={600}
+                width={640}
                 height={400}
-                className="rounded-2xl w-full h-auto object-cover transition-transform duration-700 ease-in-out hover:scale-105"
+                className="rounded-2xl w-full h-auto object-cover hover:scale-[1.03] transition-transform duration-700 ease-in-out"
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/40 to-transparent pointer-events-none" />
+              {/* subtle top gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/30 to-transparent pointer-events-none" />
             </div>
           </motion.div>
         </AnimatePresence>
-
       </div>
-
-      {/* Decorative Background Glow */}
-      <div className="absolute w-[25rem] h-[25rem] bg-indigo-200 rounded-full blur-3xl opacity-30 -top-20 -left-20 z-0" />
     </section>
   );
 }
