@@ -1,23 +1,17 @@
-import React from 'react';
-import './globals.css';
-import type { Metadata } from 'next';
+// src/app/layout.tsx
 
-export const metadata: Metadata = {
-  title: 'BhaaratCart',
-  description: 'Awesome ecommerce app',
-};
+import './globals.css'
+import Navbar from '@/components/common/Navbar'
+import Footer from '@/components/common/Footer'
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/bhaaratcart-logo.ico" type="image/x-icon" />
-      </head>
-      <body>{children}</body>
+      <body>
+        <Navbar />
+        {children} {/* Yaha pe current page load hota hai */}
+        <Footer />
+      </body>
     </html>
-  );
+  )
 }
