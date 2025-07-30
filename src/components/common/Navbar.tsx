@@ -1,30 +1,24 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import Link from "next/link";
-import Image from "next/image";
-import {
-  ShoppingCart,
-  Menu,
-  X,
-  User,
-  Search,
-} from "lucide-react";
+import React, { useState } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { ShoppingCart, Menu, X, User, Search } from 'lucide-react';
 
 const categories = [
-  "Mobiles",
-  "Clothing",
-  "Electronics",
-  "Furniture",
-  "Home & Kitchen",
-  "Grocery",
+  'Mobiles',
+  'Clothing',
+  'Electronics',
+  'Furniture',
+  'Home & Kitchen',
+  'Grocery',
 ];
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b shadow-md">
+    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b shadow-sm">
       {/* Top Bar */}
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
@@ -104,13 +98,13 @@ const Navbar = () => {
         <div className="md:hidden bg-white border-t px-6 py-4 space-y-4 text-gray-800 font-medium shadow-lg">
           <Link
             href="/(auth)/login"
-            className="block flex items-center gap-2 hover:text-blue-600"
+            className="flex items-center gap-2 hover:text-blue-600"
           >
             <User size={18} /> Login
           </Link>
           <Link
             href="/cart"
-            className="block flex items-center gap-2 hover:text-blue-600"
+            className="flex items-center gap-2 hover:text-blue-600"
           >
             <ShoppingCart size={18} /> Cart
           </Link>
