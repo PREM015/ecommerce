@@ -6,6 +6,7 @@ import FeaturedProductsSection from "@/components/section/FeaturedProducts";
 import Trendingsection from "@/components/section/Trendingsection";
 import NewArrivals from "@/components/section/NewArrivals";
 import Chatbox from "@/components/ui/Chatbox";
+import BrandsShowcase from "@/components/section/BrandsShowcase";
 
 
 export default function Home() {
@@ -28,6 +29,9 @@ export default function Home() {
       </section>
       <section id="featured">
         <NewArrivals />
+      </section>
+      <section id="featured">
+        <BrandsShowcase/>
       </section>
        <Chatbox />
     </main>
