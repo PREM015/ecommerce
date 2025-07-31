@@ -1,8 +1,4 @@
-Absolutely! Here's an **enhanced, professional, and visually rich `README.md`** tailored to your BharatCart project — designed to stand out on GitHub and impress developers or recruiters:
 
----
-
-```markdown
 <h1 align="center">🛍️ BharatCart</h1>
 <p align="center">
   <b>A modern, AI-powered eCommerce platform built with Next.js 14, Tailwind CSS & Google Gemini API</b>
@@ -153,10 +149,3 @@ Made with ❤️ by **Raj**
 ## 📝 License
 
 This project is licensed under the **MIT License**.
-
-```
-
----
-
-Would you like me to **auto-generate this `README.md`** file and save it inside your project directory (`D:\code\projects\ecommerce`)? Or do you want to include **badges** (like GitHub stars, deploy status, etc.) as well?
-```
