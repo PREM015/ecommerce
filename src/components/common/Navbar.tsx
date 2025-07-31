@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Menu, X, User, Search } from 'lucide-react';
+import { Menu, X, User, Search, Heart, HelpCircle } from 'lucide-react';
 
 const categories = [
   { name: 'Beauty', image: '/images/categories/beauty.png' },
@@ -16,6 +16,7 @@ const categories = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const isLoggedIn = false; // placeholder for auth logic
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b shadow-sm">
@@ -37,24 +38,47 @@ const Navbar = () => {
 
         {/* Desktop Links */}
         <nav className="hidden md:flex items-center gap-6 text-slate-700 text-sm font-semibold">
-          <Link
-            href="/(auth)/login"
-            className="flex items-center gap-1 hover:text-blue-600 transition-colors"
-          >
-            <User size={20} /> Login
-          </Link>
-          <Link
-            href="/cart"
-            className="flex items-center gap-1 hover:text-blue-600 transition-colors"
-          >
-            <Image
-              src="/images/ui/cart-icon.svg"
-              alt="Cart"
-              width={20}
-              height={20}
-            />
-            Cart
-          </Link>
+          {!isLoggedIn ? (
+            <>
+              <Link
+                href="/(auth)/login"
+                className="flex items-center gap-1 hover:text-blue-600 transition-colors"
+              >
+                <User size={20} /> Login
+              </Link>
+              <Link
+                href="/cart"
+                className="flex items-center gap-1 hover:text-blue-600 transition-colors"
+              >
+                <Image
+                  src="/images/ui/cart-icon.svg"
+                  alt="Cart"
+                  width={20}
+                  height={20}
+                />
+                Cart
+              </Link>
+              <Link
+                href="/wishlist"
+                className="flex items-center gap-1 hover:text-blue-600 transition-colors"
+              >
+                <Heart size={20} /> Wishlist
+              </Link>
+              <Link
+                href="/help"
+                className="flex items-center gap-1 hover:text-blue-600 transition-colors"
+              >
+                <HelpCircle size={20} /> Help
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/account" className="hover:text-blue-600">My Account</Link>
+              <Link href="/orders" className="hover:text-blue-600">Orders</Link>
+              <Link href="/cart" className="hover:text-blue-600">Cart</Link>
+              <Link href="/logout" className="hover:text-red-500">Logout</Link>
+            </>
+          )}
         </nav>
 
         {/* Mobile Menu Toggle */}
@@ -109,24 +133,30 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t px-6 py-4 space-y-4 text-gray-800 font-medium shadow-lg">
-          <Link
-            href="/(auth)/login"
-            className="flex items-center gap-2 hover:text-blue-600"
-          >
-            <User size={18} /> Login
-          </Link>
-          <Link
-            href="/cart"
-            className="flex items-center gap-2 hover:text-blue-600"
-          >
-            <Image
-              src="/images/ui/cart-icon.svg"
-              alt="Cart"
-              width={18}
-              height={18}
-            />
-            Cart
-          </Link>
+          {!isLoggedIn ? (
+            <>
+              <Link href="/(auth)/login" className="flex items-center gap-2 hover:text-blue-600">
+                <User size={18} /> Login
+              </Link>
+              <Link href="/cart" className="flex items-center gap-2 hover:text-blue-600">
+                <Image src="/images/ui/cart-icon.svg" alt="Cart" width={18} height={18} />
+                Cart
+              </Link>
+              <Link href="/wishlist" className="flex items-center gap-2 hover:text-blue-600">
+                <Heart size={18} /> Wishlist
+              </Link>
+              <Link href="/help" className="flex items-center gap-2 hover:text-blue-600">
+                <HelpCircle size={18} /> Help
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href="/account" className="hover:text-blue-600">My Account</Link>
+              <Link href="/orders" className="hover:text-blue-600">Orders</Link>
+              <Link href="/cart" className="hover:text-blue-600">Cart</Link>
+              <Link href="/logout" className="hover:text-red-500">Logout</Link>
+            </>
+          )}
         </div>
       )}
     </header>

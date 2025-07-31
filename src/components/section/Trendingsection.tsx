@@ -45,11 +45,16 @@ const trendingProducts = [
 
 const Trendingsection = () => {
   return (
-    <section className="w-full py-16 px-4 md:px-10 bg-gray-50">
+    <section className="w-full py-16 px-4 md:px-10 bg-yellow-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl md:text-4xl font-bold text-gray-800 mb-12">
-          Trending <span className="text-rose-600">Now</span>
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-800">
+            Just In <span className="text-yellow-600">Trending Picks</span>
+          </h2>
+          <p className="text-sm md:text-base text-gray-500 mt-2">
+            Handpicked items people are loving right now
+          </p>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {trendingProducts.map((product) => (

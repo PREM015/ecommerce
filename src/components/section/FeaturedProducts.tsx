@@ -44,11 +44,16 @@ const featuredProducts = [
 
 const FeaturedProductsSection = () => {
   return (
-    <section className="w-full py-16 px-4 md:px-10 bg-gradient-to-b from-white to-gray-50">
+    <section className="w-full py-16 px-4 md:px-10 bg-white border-t border-gray-200">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl md:text-4xl font-bold text-gray-800 mb-12">
-          Featured <span className="text-indigo-600">Products</span>
-        </h2>
+        <div className="text-center mb-10">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900">
+            Handpicked <span className="text-indigo-500">Favorites</span>
+          </h2>
+          <p className="mt-2 text-sm md:text-base text-gray-500">
+            Explore premium picks trending across all categories
+          </p>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {featuredProducts.map((product) => (

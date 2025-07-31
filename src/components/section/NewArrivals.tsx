@@ -1,4 +1,3 @@
-// NewArrivals.tsx placeholder
 // src/components/section/NewArrivals.tsx
 'use client';
 
@@ -46,11 +45,16 @@ const newArrivalProducts = [
 
 const NewArrivals = () => {
   return (
-    <section className="w-full py-16 px-4 md:px-10 bg-gray-50">
+    <section className="w-full py-16 px-4 md:px-10 bg-sky-50">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-center text-3xl md:text-4xl font-bold text-gray-800 mb-12">
-          New <span className="text-green-600">Arrivals</span>
-        </h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-semibold text-gray-800">
+            Fresh Finds <span className="text-sky-600">Just In</span>
+          </h2>
+          <p className="mt-2 text-sm md:text-base text-gray-500">
+            Check out our newest additions curated just for you
+          </p>
+        </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
           {newArrivalProducts.map((product) => (
@@ -63,3 +67,4 @@ const NewArrivals = () => {
 };
 
 export default NewArrivals;
+ 
