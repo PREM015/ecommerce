@@ -7,22 +7,40 @@ import { AnimatePresence, motion } from "framer-motion";
 
 const offers = [
   {
-    title: "Big Electronics Sale",
-    description: "Up to 50% off on top electronics. Grab the best deals today!",
-    image: "/images/banners/electronics-banner.png",
-    link: "/products/electronics",
+    title: 'Big Electronics Sale',
+    description: 'Up to 50% off on top electronics. Grab the best deals today!',
+    image: '/images/banners/electronics-banner.png',
+    link: '/products/electronics',
   },
   {
-    title: "Fashion Fiesta",
-    description: "Trendy styles at unbeatable prices. New arrivals just for you!",
-    image: "/images/banners/fashion-banner.png",
-    link: "/products/clothing",
+    title: 'Fashion Fiesta',
+    description: 'Trendy styles at unbeatable prices. New arrivals just for you!',
+    image: '/images/banners/fashion-banner.png',
+    link: '/products/clothing',
   },
   {
-    title: "Kitchen Essentials",
-    description: "Upgrade your kitchen with premium appliances and tools.",
-    image: "/images/banners/kitchen-banner.png",
-    link: "/products/home-kitchen",
+    title: 'Kitchen Essentials',
+    description: 'Upgrade your kitchen with premium appliances and tools.',
+    image: '/images/banners/kitchen-banner.png',
+    link: '/products/home-kitchen',
+  },
+  {
+    title: 'Grocery Bonanza',
+    description: 'Fresh groceries at your doorstep. Everyday low prices!',
+    image: '/images/banners/groceries-banner.png',
+    link: '/products/groceries',
+  },
+  {
+    title: 'Home & Living',
+    description: 'Modern home appliances for smart living and comfort.',
+    image: '/images/banners/home-banner.png',
+    link: '/products/home-appliances',
+  },
+  {
+    title: 'Beauty & Care',
+    description: 'Pamper yourself with top beauty and personal care picks.',
+    image: '/images/banners/beauty-banner.png',
+    link: '/products/beauty',
   },
 ];
 
