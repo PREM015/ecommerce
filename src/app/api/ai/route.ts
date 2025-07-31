@@ -2,24 +2,27 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   const { prompt } = await req.json();
+  const apiKey = process.env.GOOGLE_GEMINI_API_KEY;
 
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer chatboxkey`,
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      model: 'openchat/openchat-3.5', // or other model
-      messages: [
-        { role: 'system', content: 'You are a helpful assistant.' },
-        { role: 'user', content: prompt }
-      ]
-    })
-  });
+  if (!apiKey) {
+    return NextResponse.json({ answer: 'Missing API key' }, { status: 500 });
+  }
+
+  const response = await fetch(
+    'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=' + apiKey,
+    {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+      }),
+    }
+  );
 
   const data = await response.json();
-  const answer = data.choices?.[0]?.message?.content || "I'm not sure how to respond.";
+  const answer =
+    data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+    '⚠️ Gemini did not return a response.';
 
   return NextResponse.json({ answer });
 }
