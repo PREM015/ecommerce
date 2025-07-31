@@ -3,15 +3,15 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ShoppingCart, Menu, X, User, Search } from 'lucide-react';
+import { Menu, X, User, Search } from 'lucide-react';
 
 const categories = [
-  'Mobiles',
-  'Clothing',
-  'Electronics',
-  'Furniture',
-  'Home & Kitchen',
-  'Grocery',
+  { name: 'Beauty', image: '/images/categories/beauty.png' },
+  { name: 'Clothing', image: '/images/categories/clothing.png' },
+  { name: 'Electronics', image: '/images/categories/electronics.png' },
+  { name: 'Groceries', image: '/images/categories/groceries.png' },
+  { name: 'Home', image: '/images/categories/home-appliance.png' },
+  { name: 'Kitchen', image: '/images/categories/kitchen.png' },
 ];
 
 const Navbar = () => {
@@ -47,7 +47,13 @@ const Navbar = () => {
             href="/cart"
             className="flex items-center gap-1 hover:text-blue-600 transition-colors"
           >
-            <ShoppingCart size={20} /> Cart
+            <Image
+              src="/images/ui/cart-icon.svg"
+              alt="Cart"
+              width={20}
+              height={20}
+            />
+            Cart
           </Link>
         </nav>
 
@@ -80,14 +86,21 @@ const Navbar = () => {
 
       {/* Categories Row */}
       <div className="bg-white border-b overflow-x-auto hide-scrollbar">
-        <div className="max-w-7xl mx-auto px-6 py-3 flex gap-3">
+        <div className="max-w-7xl mx-auto px-4 py-3 flex gap-3">
           {categories.map((category, idx) => (
             <Link
               key={idx}
               href="/product"
-              className="px-4 py-1.5 whitespace-nowrap rounded-full text-sm font-medium text-gray-700 bg-slate-100 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white transition-all duration-200 shadow-sm"
+              className="flex items-center min-w-max gap-2 px-3 py-1.5 rounded-full text-sm font-medium text-gray-700 bg-slate-100 hover:bg-gradient-to-r hover:from-blue-500 hover:to-indigo-500 hover:text-white transition-all duration-200 shadow-sm"
             >
-              {category}
+              <Image
+                src={category.image}
+                alt={category.name}
+                width={26}
+                height={26}
+                className="rounded-full"
+              />
+              <span className="truncate max-w-[80px]">{category.name}</span>
             </Link>
           ))}
         </div>
@@ -106,7 +119,13 @@ const Navbar = () => {
             href="/cart"
             className="flex items-center gap-2 hover:text-blue-600"
           >
-            <ShoppingCart size={18} /> Cart
+            <Image
+              src="/images/ui/cart-icon.svg"
+              alt="Cart"
+              width={18}
+              height={18}
+            />
+            Cart
           </Link>
         </div>
       )}

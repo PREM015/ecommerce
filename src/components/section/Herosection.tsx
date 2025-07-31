@@ -62,7 +62,7 @@ export default function Herosection() {
       <div className="absolute w-[30rem] h-[30rem] bg-purple-300 rounded-full blur-3xl opacity-30 -top-24 -left-20 z-0" />
 
       <div className="max-w-7xl mx-auto relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
-        {/* Text Content */}
+        {/* Text Section */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`text-${index}`}
@@ -87,7 +87,7 @@ export default function Herosection() {
           </motion.div>
         </AnimatePresence>
 
-        {/* Image Content */}
+        {/* Image Section */}
         <AnimatePresence mode="wait">
           <motion.div
             key={`image-${index}`}
@@ -107,11 +107,24 @@ export default function Herosection() {
                 priority
                 sizes="(max-width: 768px) 100vw, 50vw"
               />
-              {/* subtle top gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/30 to-transparent pointer-events-none" />
             </div>
           </motion.div>
         </AnimatePresence>
+      </div>
+
+      {/* Dot Navigation */}
+      <div className="flex justify-center mt-10 gap-3 z-10 relative">
+        {offers.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIndex(i)}
+            className={`w-3 h-3 rounded-full transition-all ${
+              index === i ? 'bg-purple-600 scale-125' : 'bg-gray-300'
+            }`}
+            aria-label={`Slide ${i + 1}`}
+          />
+        ))}
       </div>
     </section>
   );
