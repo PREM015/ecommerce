@@ -15,7 +15,7 @@ const Chatbox = () => {
     if (!input.trim()) return;
 
     const userMessage = { sender: 'user', text: input };
-    setMessages((prev) => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage, { sender: 'bot', text: '🤖 Thinking...' }]);
     setInput('');
 
     try {
@@ -28,14 +28,12 @@ const Chatbox = () => {
       const data = await res.json();
       const botMessage = { sender: 'bot', text: data.answer };
 
-      setMessages((prev) => [...prev, botMessage]);
+      // Replace "Thinking..." with actual answer
+      setMessages((prev) => [...prev.slice(0, -1), botMessage]);
     } catch (err) {
       setMessages((prev) => [
-        ...prev,
-        {
-          sender: 'bot',
-          text: 'Something went wrong. Please try again later.',
-        },
+        ...prev.slice(0, -1),
+        { sender: 'bot', text: '❌ Something went wrong. Try again later.' },
       ]);
     }
   };
