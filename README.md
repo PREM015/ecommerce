@@ -1,70 +1,67 @@
 
 <h1 align="center">🛍️ BharatCart</h1>
-<p align="center">
-  <b>A modern, AI-powered eCommerce platform built with Next.js 14, Tailwind CSS & Google Gemini API</b>
-</p>
+<p align="center"><b>A high-performance, AI-powered eCommerce platform built with Next.js 14, Tailwind CSS, and Google Gemini API</b></p>
 
 <p align="center">
   <img src="public/images/ui/placeholder.png" alt="BharatCart Banner" width="300" />
 </p>
 
+---
+
+## 🚀 Live Preview
+
+> **Coming Soon** – Stay tuned!
 
 ---
 
-## 🚀 Live Demo
+## ✨ Key Features
 
-> Coming Soon...
-
----
-
-## ✨ Features
-
-- 💼 **Enterprise-level UI** with category-based product filtering
-- 🎯 **Modular & optimized** with `App Router` and dynamic routing
-- 🧠 **Real-time AI Chatbot** powered by Google Gemini
-- 📱 **Fully responsive** design for mobile, tablet, and desktop
-- 🖼️ **Smart image handling** with fallback placeholders
-- 📦 Organized codebase: scalable, clean, and easy to maintain
-- 🌐 SEO-ready with performance optimizations
+- ⚡️ **Fast & modern UI** with optimized routing (Next.js App Router)
+- 🧠 **Built-in AI chatbot** powered by Google Gemini API
+- 📱 **Mobile-first design** with seamless responsiveness
+- 🖼️ **Smart image handling** with graceful fallbacks
+- 🎯 **Modular architecture** with scalable file structure
+- 🔍 SEO-friendly, performant & accessible
+- 🧹 **Clean, maintainable codebase** ideal for production
 
 ---
 
-## 📁 Folder Structure
+## 📁 Project Structure
 
 ```
 
-/ecommerce
+/bharatcart
 ├── public/
-│   ├── images/
-│   │   ├── banners/
-│   │   ├── categories/
-│   │   └── ui/                # avatar-placeholder.png, cart-icon.svg, error.png, etc.
+│   └── images/
+│       ├── banners/
+│       ├── categories/
+│       └── ui/                  # Placeholder images, cart icons, etc.
 │
 ├── src/
-│   ├── app/                   # App Router pages and layout
+│   ├── app/                     # Routing, layouts, and pages
 │   ├── components/
-│   │   ├── common/            # Navbar, Footer, Chatbox
-│   │   └── section/           # Homepage sections (Hero, Categories, New Arrivals)
-│   ├── styles/                # Global styles & Tailwind config
-│   └── utils/                 # API utilities, helper functions
+│   │   ├── common/              # Shared components (Navbar, Footer, Chatbox)
+│   │   └── section/             # Homepage sections
+│   ├── styles/                  # Tailwind config and global styles
+│   └── utils/                   # Helper functions, API handlers
 │
-├── .env.local                 # API Keys and secrets
+├── .env.local                   # Environment variables (API keys)
 └── README.md
 
 ````
 
 ---
 
-## 🧠 AI Chatbot — BharatBot
+## 🤖 BharatBot – AI Chat Support
 
-> Location: `src/components/common/Chatbox.tsx`
+> Located in: `src/components/common/Chatbox.tsx`
 
-- Appears bottom-right on homepage
-- React + Lucide icons + Gemini API
-- Instant replies to customer questions
+A floating chatbot powered by **Google Gemini API** offering real-time assistance to users.
 
-🛠️ **Setup Gemini API**  
-Sign up for a [Gemini API key](https://makersuite.google.com/app/apikey) and add this to `.env.local`:
+### Setup Instructions
+
+1. Get your free API key at [makersuite.google.com](https://makersuite.google.com/app/apikey)
+2. Create a `.env.local` file in the root:
 
 ```env
 NEXT_PUBLIC_GEMINI_API_KEY=your_google_gemini_api_key
@@ -72,27 +69,27 @@ NEXT_PUBLIC_GEMINI_API_KEY=your_google_gemini_api_key
 
 ---
 
-## 📷 Image Strategy
+## 🖼️ Image Strategy
 
-* Product & category images stored under `public/images`
-* Graceful fallback to `/images/ui/placeholder.png` if missing
-* Optimized using Next.js `<Image />` component
+* All product/category banners are stored in `/public/images`
+* Uses Next.js `<Image />` for optimization
+* Automatic fallback to `/images/ui/placeholder.png` when image is missing
 
 ---
 
-## 🔧 Getting Started
+## 🛠️ Getting Started
 
 ```bash
-# 1. Clone the repository
+# 1. Clone the repo
 git clone https://github.com/your-username/bharatcart.git
 
-# 2. Navigate to the project folder
+# 2. Go to the project folder
 cd bharatcart
 
 # 3. Install dependencies
 npm install
 
-# 4. Create a .env.local file with your Gemini API Key
+# 4. Add your Gemini API Key
 touch .env.local
 # Add:
 # NEXT_PUBLIC_GEMINI_API_KEY=your_key_here
@@ -101,52 +98,57 @@ touch .env.local
 npm run dev
 ```
 
-Visit: [http://localhost:3000](http://localhost:3000)
+➡️ Visit: [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 🛒 Home Sections Included
+## 🏠 Homepage Sections
 
-* ✅ Hero Banner with rotating images
-* ✅ Product Categories with hover effects
-* ✅ New Arrivals & Trending Products
-* ✅ Brand Showcase Slider
-* ✅ Newsletter Sign-up
-* ✅ Elegant Footer with quick links
-
----
-
-## ⚙️ Built With
-
-| Tech         | Usage                 |
-| ------------ | --------------------- |
-| Next.js 14   | App routing, SSR, SEO |
-| React        | Component-based UI    |
-| Tailwind CSS | Utility-first styling |
-| TypeScript   | Type-safe development |
-| Lucide Icons | Beautiful iconography |
-| Gemini API   | AI-powered chatbot    |
+* ✅ Hero Banner (rotating promotional images)
+* ✅ Product Categories (interactive with hover)
+* ✅ Trending & New Arrivals
+* ✅ Brand Slider
+* ✅ Newsletter Signup
+* ✅ Footer with helpful links & branding
 
 ---
 
-## 📦 Future Enhancements
+## ⚙️ Tech Stack
 
-* 🛒 Cart & Checkout Pages
-* 🔐 User Authentication
-* 🔍 Search & Filter Logic
-* 🧾 Order History
-* 🌍 i18n Support
+| Tool                  | Purpose                              |
+| --------------------- | ------------------------------------ |
+| **Next.js 14**        | App routing, SSR, image optimization |
+| **React**             | UI components and state management   |
+| **Tailwind CSS**      | Utility-first styling system         |
+| **TypeScript**        | Strong typing for scalable code      |
+| **Lucide Icons**      | Elegant, consistent icons            |
+| **Google Gemini API** | AI Chatbot integration               |
+
+---
+
+## 🌟 Upcoming Features
+
+* 🛒 Cart & Checkout pages
+* 🔐 User authentication (Sign in/up)
+* 🔍 Search, filter & sorting
+* 🧾 Order history tracking
+* 🌐 Multilingual (i18n) support
 
 ---
 
 ## 📬 Contact
 
-Made with ❤️ by **Raj**
-📧 \[[your-email@example.com](mailto:your-email@example.com)]
-🔗 [LinkedIn](https://linkedin.com/in/your-profile) — [Portfolio](https://your-portfolio.com)
+> Made with ❤️ by [Raj](https://linkedin.com/in/your-profile)
+
+📧 [your-email@example.com](mailto:your-email@example.com)
+🔗 [LinkedIn](https://linkedin.com/in/your-profile)
+🌐 [Portfolio](https://your-portfolio.com)
 
 ---
 
 ## 📝 License
 
-This project is licensed under the **MIT License**.
+Licensed under the [MIT License](LICENSE).
+
+---
+
