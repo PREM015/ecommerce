@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import Image from 'next/image';
 
+
 const Chatbox = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
