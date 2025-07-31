@@ -8,6 +8,7 @@
   <img src="public/images/ui/placeholder.png" alt="BharatCart Banner" width="300" />
 </p>
 
+
 ---
 
 ## 🚀 Live Demo
