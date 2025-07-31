@@ -44,13 +44,13 @@ const featuredProducts = [
 
 const FeaturedProductsSection = () => {
   return (
-    <section className="w-full py-16 px-4 md:px-10 bg-white">
+    <section className="w-full py-16 px-4 md:px-10 bg-gradient-to-b from-white to-gray-50">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-center text-3xl md:text-4xl font-bold text-gray-800 mb-12">
           Featured <span className="text-indigo-600">Products</span>
         </h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6">
           {featuredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
