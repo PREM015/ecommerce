@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { MessageCircle, X, Send } from 'lucide-react';
 import Image from 'next/image';
 
-
 const Chatbox = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([
@@ -32,6 +31,7 @@ const Chatbox = () => {
       // Replace "Thinking..." with actual answer
       setMessages((prev) => [...prev.slice(0, -1), botMessage]);
     } catch (err) {
+      console.error(err); // ✅ Fix: log the error to avoid ESLint warning
       setMessages((prev) => [
         ...prev.slice(0, -1),
         { sender: 'bot', text: '❌ Something went wrong. Try again later.' },
