@@ -1,1 +1,24 @@
-// manifest.json placeholder
+
+{
+  "name": "BharatCart",
+  "short_name": "BharatCart",
+  "description": "Shop the best products across India – Fashion, Electronics, Groceries, and more.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/images/ui/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/ui/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

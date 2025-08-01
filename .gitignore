@@ -49,3 +49,4 @@ next-env.d.ts
 
 # Optional
 prisma/migrations/
+.vscode/settings.json
