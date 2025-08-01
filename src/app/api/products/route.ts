@@ -1,21 +1,40 @@
-import { NextResponse, NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
+import { Product } from '@/types/product';
+
+type Filters = {
+  price: {
+    gte: number;
+    lte: number;
+  };
+  category?: { name: string };
+  isFeatured?: boolean;
+  isNew?: boolean;
+};
 
 export async function GET(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const priceMin = parseFloat(searchParams.get("min") || "0");
-    const priceMax = parseFloat(searchParams.get("max") || "100000");
-    const isNew = searchParams.get("new") === "true";
+
+    const category = searchParams.get('category');
+    const isFeatured = searchParams.get('featured') === 'true';
+    const isNew = searchParams.get('new') === 'true';
+    const priceMin = parseFloat(searchParams.get('min') || '0');
+    const priceMax = parseFloat(searchParams.get('max') || '100000');
+
+    const filters: Filters = {
+      price: {
+        gte: priceMin,
+        lte: priceMax,
+      },
+    };
+
+    if (category) filters.category = { name: category };
+    if (isFeatured) filters.isFeatured = true;
+    if (isNew) filters.isNew = true;
 
     const products = await prisma.product.findMany({
-      where: {
-        price: {
-          gte: priceMin,
-          lte: priceMax,
-        },
-        ...(isNew ? { isNew: true } : {}),
-      },
+      where: filters,
       include: {
         category: true,
       },
@@ -24,7 +43,26 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    return NextResponse.json(products, { status: 200 });
+    const response: Product[] = products.map((product) => ({
+      id: product.id,
+      name: product.name,
+      description: product.description ?? '',
+      price: product.price,
+      discountPercentage: product.discountPercentage ?? 0,
+      rating: product.rating ?? 0,
+      stock: product.stock ?? 0,
+      brand: product.brand ?? '',
+      categoryId: product.categoryId,
+      categoryName: product.category?.name ?? '',
+      image: product.image ?? '',
+      imageUrl: product.image ?? '',
+      isNew: product.isNew ?? false,
+      isFeatured: product.isFeatured ?? false,
+      createdAt: product.createdAt.toISOString(),
+      updatedAt: product.updatedAt.toISOString(),
+    }));
+
+    return NextResponse.json(response, { status: 200 });
   } catch (error) {
     console.error('Error fetching products:', error);
     return NextResponse.json(
