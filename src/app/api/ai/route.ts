@@ -26,7 +26,7 @@ export async function POST(req: Request) {
 
     const answer =
       data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-      '⚠️ Gemini did not return a response.';
+      'question is not vaild .';
 
     return NextResponse.json({ answer });
   } catch (err) {

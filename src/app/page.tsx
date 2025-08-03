@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import Herosection from "@/components/section/Herosection";
 import CategorySection from "@/components/section/CategorySection";
 import FeaturedProductsSection from "@/components/section/FeaturedProducts";
@@ -22,22 +23,34 @@ export default function Home() {
       <section id="categories">
         <CategorySection />
       </section>
-      <section id="featured">
+
+      {/* ✅ Featured Products */}
+      <section id="featured-products">
         <FeaturedProductsSection />
       </section>
-      <section id="featured">
+
+      {/* ✅ Trending Products */}
+      <section id="trending">
         <Trendingsection />
       </section>
-      <section id="featured">
+
+      {/* ✅ New Arrivals */}
+      <section id="new-arrivals">
         <NewArrivals />
       </section>
-      <section id="featured">
-        <BrandsShowcase/>
+
+      {/* ✅ Brands */}
+      <section id="brands">
+        <BrandsShowcase />
       </section>
-      <section id="featured">
-        <Newsletter/>
+
+      {/* ✅ Newsletter */}
+      <section id="newsletter">
+        <Newsletter />
       </section>
-       <Chatbox />
+
+      {/* ✅ AI Chatbox */}
+      <Chatbox />
     </main>
   );
 }

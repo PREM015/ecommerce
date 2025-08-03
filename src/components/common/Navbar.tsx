@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Menu, X, User, Search, Heart, HelpCircle } from 'lucide-react';
 
+
+
 const categories = [
   { name: 'Beauty', image: '/images/categories/beauty.png' },
   { name: 'Clothing', image: '/images/categories/clothing.png' },
@@ -41,7 +43,7 @@ const Navbar = () => {
           {!isLoggedIn ? (
             <>
               <Link
-                href="/(auth)/login"
+                href="/login"
                 className="flex items-center gap-1 hover:text-blue-600 transition-colors"
               >
                 <User size={20} /> Login
