@@ -1,24 +1,25 @@
 import { NextResponse } from 'next/server';
-import cloudinary from '@/config/cloudinary';
+import fs from 'fs';
+import path from 'path';
 
 export async function GET() {
   try {
-    const result = await cloudinary.api.resources({
-      type: 'upload',
-      prefix: 'ecommerce/images/avatars/', // update if needed
-      max_results: 500,
-    });
+    const avatarDir = path.join(process.cwd(), 'public', 'images', 'ui', 'avatar-placeholder');
+    const categories = fs.readdirSync(avatarDir, { withFileTypes: true }).filter(dirent => dirent.isDirectory());
 
-    const avatarUrls = result.resources.map((file: CloudinaryResource) => file.secure_url);
+    const avatars: { [category: string]: string[] } = {};
 
-    return NextResponse.json({ avatars: avatarUrls });
+    for (const category of categories) {
+      const categoryName = category.name;
+      const categoryPath = path.join(avatarDir, categoryName);
+      const files = fs.readdirSync(categoryPath);
+
+      avatars[categoryName] = files.map(file => `/images/ui/avatar-placeholder/${categoryName}/${file}`);
+    }
+
+    return NextResponse.json({ avatars });
   } catch (error) {
-    console.error('Cloudinary error:', error);
-    return NextResponse.json({ error: 'Failed to fetch avatars' }, { status: 500 });
+    console.error('Local avatar error:', error);
+    return NextResponse.json({ error: 'Failed to load local avatars' }, { status: 500 });
   }
-}
-
-// Define a proper type instead of using `any`
-interface CloudinaryResource {
-  secure_url: string;
 }

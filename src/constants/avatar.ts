@@ -1,89 +1,23 @@
-export type AvatarCategory = {
-  name: string;
-  avatars: {
-    name: string;
-    url: string;
-  }[];
-};
+// src/constants/avatar.ts
+
+import { AvatarCategory } from '@/types/avatar';
 
 export const avatarCategories: AvatarCategory[] = [
   {
-    name: "Boy",
-    avatars: [
-      {
-        name: "AV9",
-        url: "/images/ui/avatar-placeholder/boy/AV9.png",
-      },
+    name: 'male',
+    images: [
+      { name: 'Male 1', url: '/images/ui/avatar-placeholder/boy/AV1.png' },
+      { name: 'Male 2', url: '/images/ui/avatar-placeholder/boy/AV2.png' },
+      // ...
     ],
   },
   {
-    name: "Girl",
-    avatars: [
-      {
-        name: "AV57",
-        url: "/images/ui/avatar-placeholder/girl/AV57.png",
-      },
+    name: 'female',
+    images: [
+      { name: 'Female 1', url: '/images/ui/avatar-placeholder/girl/AV1.png' },
+      { name: 'Female 2', url: '/images/ui/avatar-placeholder/girl/AV2.png' },
+      // ...
     ],
   },
-  {
-    name: "ID",
-    avatars: [
-      {
-        name: "AV99",
-        url: "/images/ui/avatar-placeholder/id/AV99.png",
-      },
-    ],
-  },
-  {
-    name: "Job - Astronomer",
-    avatars: [
-      {
-        name: "Astronomer Female",
-        url: "/images/ui/avatar-placeholder/job/astronomer/female.png",
-      },
-      {
-        name: "Astronomer Male",
-        url: "/images/ui/avatar-placeholder/job/astronomer/male.png",
-      },
-    ],
-  },
-  {
-    name: "Job - Chef",
-    avatars: [
-      {
-        name: "Chef Male",
-        url: "/images/ui/avatar-placeholder/job/chef/male.png",
-      },
-      {
-        name: "Chef Female",
-        url: "/images/ui/avatar-placeholder/job/chef/female.png",
-      },
-    ],
-  },
-  {
-    name: "Job - Designer",
-    avatars: [
-      {
-        name: "Designer Male",
-        url: "/images/ui/avatar-placeholder/job/designer/male.png",
-      },
-      {
-        name: "Designer Female",
-        url: "/images/ui/avatar-placeholder/job/designer/female.png",
-      },
-    ],
-  },
-  {
-    name: "Job - Doctor",
-    avatars: [
-      {
-        name: "Doctor Male",
-        url: "/images/ui/avatar-placeholder/job/doctor/male.png",
-      },
-      {
-        name: "Doctor Female",
-        url: "/images/ui/avatar-placeholder/job/doctor/female.png",
-      },
-    ],
-  },
+  // add more categories if needed
 ];
