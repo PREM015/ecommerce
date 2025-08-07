@@ -51,3 +51,5 @@ next-env.d.ts
 prisma/migrations/
 .vscode/settings.json
 temp.ts
+prisma/schema.prisma
+prisma/schema.prisma

@@ -1,3 +1,7 @@
+// --------------------
+// Prisma Configuration
+// --------------------
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -7,90 +11,111 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Category {
-  id       String    @id @default(uuid())
-  name     String    @unique
-  products Product[]
-}
+// --------------------
+// Models
+// --------------------
 
-model Product {
-  id                 String   @id @default(uuid())
-  name               String
-  description        String?
-  price              Float
-  imageUrl           String?
-  isNew              Boolean  @default(false)
-  isFeatured         Boolean  @default(false)
-  brand              String?
-  stock              Int      @default(0)
-  rating             Float    @default(0)
-  discountPercentage Float    @default(0)
-  categoryId         String
-  category           Category @relation(fields: [categoryId], references: [id])
-  createdAt          DateTime @default(now())
-  updatedAt          DateTime @updatedAt
-
-  orderItems OrderItem[]
-  Review     Review[]
-}
-
+/// Represents the primary user of BharatCart
+/// Can be a regular customer or promoted to admin/store owner
 model User {
   id        String   @id @default(uuid())
   name      String
   email     String?  @unique
   phone     String?  @unique
   password  String
-  avatar    String?
+  avatar    String? // Local path or Cloudinary URL
   isAdmin   Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  orders Order[] @relation("UserOrders")
-  admin  Admin?  @relation("AdminUser") // optional back-reference
-
-  reviews Review[]
+  // Relations
+  orders  Order[]  @relation("UserOrders") // Orders placed by the user
+  reviews Review[] // Reviews written by the user
+  admin   Admin?   @relation("AdminUser") // If user is an admin/store owner
 }
 
+/// Represents admin/store owner who manages a store
 model Admin {
   id         String   @id @default(uuid())
   userId     String   @unique
-  user       User     @relation("AdminUser", fields: [userId], references: [id])
   storeName  String
-  storeUrl   String?
+  storeUrl   String?  @unique
   isVerified Boolean  @default(false)
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
+
+  // Relations
+  user     User      @relation("AdminUser", fields: [userId], references: [id])
+  products Product[] // Products uploaded by admin
+  orders   Order[] // Orders received for admin’s products
 }
 
+/// Categories used to classify products
+model Category {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  products Product[] // All products in this category
+}
+
+/// Products listed by Admins
+model Product {
+  id                 String  @id @default(uuid())
+  title              String
+  description        String
+  price              Float
+  image              String // Image path (local/Cloudinary)
+  stock              Int
+  isNew              Boolean @default(false)
+  isFeatured         Boolean @default(false)
+  brand              String?
+  rating             Float   @default(0)
+  discountPercentage Float   @default(0)
+
+  categoryId String
+  adminId    String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relations
+  category   Category    @relation(fields: [categoryId], references: [id])
+  admin      Admin       @relation(fields: [adminId], references: [id])
+  reviews    Review[]
+  orderItems OrderItem[]
+}
+
+/// Orders placed by users
 model Order {
   id              String      @id @default(uuid())
   userEmail       String
-  user            User        @relation("UserOrders", fields: [userEmail], references: [email])
+  userId          String
+  adminId         String
   totalAmount     Float
   status          OrderStatus @default(PENDING)
   shippingAddress String
-  items           OrderItem[]
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
+
+  // Relations
+  user  User        @relation("UserOrders", fields: [userId], references: [id])
+  admin Admin       @relation(fields: [adminId], references: [id])
+  items OrderItem[]
 }
 
+/// Line items inside an order (joins product with order)
 model OrderItem {
   id        Int    @id @default(autoincrement())
   orderId   String
   productId String
   quantity  Int
+  price     Float
 
+  // Relations
   order   Order   @relation(fields: [orderId], references: [id])
   product Product @relation(fields: [productId], references: [id])
 }
 
-enum OrderStatus {
-  PENDING
-  SHIPPED
-  DELIVERED
-  CANCELLED
-}
-
+/// User-generated product reviews
 model Review {
   id        String   @id @default(uuid())
   rating    Int
@@ -101,6 +126,15 @@ model Review {
   userId    String
   productId String
 
+  // Relations
   user    User    @relation(fields: [userId], references: [id])
   product Product @relation(fields: [productId], references: [id])
+}
+
+/// Status enums for orders
+enum OrderStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
 }
