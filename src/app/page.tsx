@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Herosection from "@/components/section/Herosection";
+import Herosection from "@/components/section/HeroSection";
 import CategorySection from "@/components/section/CategorySection";
 import FeaturedProductsSection from "@/components/section/FeaturedProducts";
 import Trendingsection from "@/components/section/Trendingsection";
