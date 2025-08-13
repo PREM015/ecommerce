@@ -29,9 +29,10 @@ model User {
   updatedAt DateTime @updatedAt
 
   // Relations
-  orders  Order[]  @relation("UserOrders") // Orders placed by the user
-  reviews Review[] // Reviews written by the user
-  admin   Admin?   @relation("AdminUser") // If user is an admin/store owner
+  orders              Order[]              @relation("UserOrders") // Orders placed by the user
+  reviews             Review[] // Reviews written by the user
+  admin               Admin?               @relation("AdminUser") // If user is an admin/store owner
+  passwordResetTokens PasswordResetToken[] // Tokens for password reset
 }
 
 /// Represents admin/store owner who manages a store
@@ -48,6 +49,18 @@ model Admin {
   user     User      @relation("AdminUser", fields: [userId], references: [id])
   products Product[] // Products uploaded by admin
   orders   Order[] // Orders received for admin’s products
+}
+
+/// Stores tokens for password reset
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  token     String   @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  // Relations
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 /// Categories used to classify products

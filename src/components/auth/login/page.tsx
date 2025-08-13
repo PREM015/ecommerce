@@ -1,51 +1,53 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function LoginForm() {
-  const [identifier, setIdentifier] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    setError("");
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          identifier,
-          password,
-          mode: 'login',
-        }),
+      const res = await fetch("/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier, password }),
       });
 
       const data = await res.json();
 
-      if (!res.ok) throw new Error(data.error || 'Login failed');
+      if (!res.ok) throw new Error(data.message || "Login failed");
 
-      // TODO: store token if needed
-      router.push('/');
+      // Redirect to homepage after successful login
+      router.push("/");
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'An unknown error occurred');
+      setError(err instanceof Error ? err.message : "An unknown error occurred");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-md w-full mx-auto bg-white shadow-md p-8 rounded-lg border">
-      <h2 className="text-2xl font-semibold text-center mb-6 text-gray-800">Login to Your Account</h2>
+    <div className="max-w-md w-full mx-auto bg-white shadow-lg p-8 rounded-xl border border-gray-200">
+      <h2 className="text-3xl font-bold text-center mb-2 text-gray-800">
+        Welcome Back
+      </h2>
+      <p className="text-center text-gray-500 mb-6">
+        Please log in to continue
+      </p>
+
       <form onSubmit={handleLogin} className="space-y-5">
         <div>
-          <label className="block text-sm text-gray-600 mb-1">Email or Phone</label>
+          <label className="block text-sm text-gray-700 mb-1">Email or Phone</label>
           <input
             type="text"
             placeholder="example@gmail.com or +91xxxxxxxxxx"
@@ -57,7 +59,7 @@ export default function LoginForm() {
         </div>
 
         <div>
-          <label className="block text-sm text-gray-600 mb-1">Password</label>
+          <label className="block text-sm text-gray-700 mb-1">Password</label>
           <input
             type="password"
             placeholder="••••••••"
@@ -75,14 +77,20 @@ export default function LoginForm() {
           disabled={loading}
           className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
         >
-          {loading ? 'Logging in...' : 'Login'}
+          {loading ? "Logging in..." : "Login"}
         </button>
       </form>
 
       <p className="text-center text-sm text-gray-600 mt-6">
-        Don’t have an account?{' '}
+        Don’t have an account?{" "}
         <Link href="/register" className="text-blue-600 hover:underline">
           Create one
+        </Link>
+      </p>
+      <p className="text-center text-sm text-gray-600 mt-6">
+        
+        <Link href="/forgot-password" className="text-blue-600 hover:underline">
+          forget Password
         </Link>
       </p>
     </div>
