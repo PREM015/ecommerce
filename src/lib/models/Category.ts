@@ -1,7 +1,7 @@
 // Category.ts
 // src/lib/models/Category.ts
 
-import { prisma } from '../prisma';
+import { prisma } from '@/lib/db';
 import { Category } from '@prisma/client';
 
 

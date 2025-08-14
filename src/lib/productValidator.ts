@@ -1,1 +1,0 @@
-// productValidator.ts placeholder

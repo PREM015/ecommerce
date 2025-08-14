@@ -61,13 +61,14 @@ export async function updateCategoryHandler(req: NextRequest, id: string) {
       return new NextResponse("Category name is required", { status: 400 });
     }
 
-    const updated = await updateCategory(id, name);
+    const updated = await updateCategory(id, { name }); // ✅ FIXED
     return NextResponse.json(updated);
   } catch (error) {
     console.error("Error updating category:", error);
     return new NextResponse("Failed to update category", { status: 500 });
   }
 }
+
 
 // Delete category
 export async function deleteCategoryHandler(id: string) {

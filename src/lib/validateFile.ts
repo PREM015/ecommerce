@@ -1,1 +1,0 @@
-// validateFile.ts placeholder

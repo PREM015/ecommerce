@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/db";
 import { Product } from "@/types/product";
 
 type Filters = {
@@ -45,7 +45,7 @@ export async function GET(req: NextRequest) {
 
     const response: Product[] = products.map((product) => ({
       id: product.id,
-      name: product.name,
+      name: product.title,
       description: product.description ?? "",
       price: product.price,
       discountPercentage: product.discountPercentage ?? 0,
@@ -71,12 +71,13 @@ export async function GET(req: NextRequest) {
     );
   }
 }
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
     const {
-      name,
+      title,
       description,
       price,
       discountPercentage,
@@ -84,26 +85,33 @@ export async function POST(req: NextRequest) {
       stock,
       brand,
       categoryId,
+      adminId, // ✅ Added adminId from request
       image,
-      imageUrl,
       isNew,
       isFeatured,
     } = body;
 
+    if (!categoryId || !adminId) {
+      return NextResponse.json(
+        { error: "categoryId and adminId are required" },
+        { status: 400 }
+      );
+    }
+
     const product = await prisma.product.create({
       data: {
-        name,
+        title,
         description,
         price,
         discountPercentage,
         rating,
         stock,
         brand,
-        categoryId,
         image,
-        imageUrl,
         isNew,
         isFeatured,
+        category: { connect: { id: categoryId } }, // ✅ Safe relation connect
+        admin: { connect: { id: adminId } },       // ✅ Safe relation connect
       },
     });
 
