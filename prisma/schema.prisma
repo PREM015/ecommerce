@@ -1,7 +1,6 @@
 // --------------------
 // Prisma Configuration
 // --------------------
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -30,7 +29,7 @@ model User {
 
   // Relations
   orders              Order[]              @relation("UserOrders") // Orders placed by the user
-  reviews             Review[] // Reviews written by the user
+  reviews             Review[]             // Reviews written by the user
   admin               Admin?               @relation("AdminUser") // If user is an admin/store owner
   passwordResetTokens PasswordResetToken[] // Tokens for password reset
 }
@@ -48,7 +47,7 @@ model Admin {
   // Relations
   user     User      @relation("AdminUser", fields: [userId], references: [id])
   products Product[] // Products uploaded by admin
-  orders   Order[] // Orders received for admin’s products
+  orders   Order[]   // Orders received for admin’s products
 }
 
 /// Stores tokens for password reset
