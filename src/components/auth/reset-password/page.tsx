@@ -3,15 +3,15 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
-export default function ResetPasswordPage() {
+export default function ResetPasswordForm() {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
 
-  const router = useRouter();
-  const [newPassword, setNewPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -20,30 +20,34 @@ export default function ResetPasswordPage() {
     }
   }, [token]);
 
-  const handleResetPassword = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!token) return;
 
-    if (newPassword !== confirmPassword) {
+    if (!token) {
+      setError("Invalid or missing token");
+      return;
+    }
+
+    if (password !== confirmPassword) {
       setError("Passwords do not match");
       return;
     }
 
     setError("");
-    setMessage("");
+    setSuccess("");
     setLoading(true);
 
     try {
       const res = await fetch("/api/auth/reset-password", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ token, newPassword }),
+        body: JSON.stringify({ token, password }),
       });
 
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error || "Something went wrong");
+      if (!res.ok) throw new Error(data.message || "Password reset failed");
 
-      setMessage("Password updated successfully! Redirecting to login...");
+      setSuccess("Password updated successfully! Redirecting to login...");
       setTimeout(() => router.push("/login"), 2000);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "An unknown error occurred");
@@ -53,29 +57,29 @@ export default function ResetPasswordPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-12 bg-white p-8 shadow-lg rounded-xl border">
-      <h2 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+    <div className="max-w-md w-full mx-auto bg-white shadow-lg p-8 rounded-xl border border-gray-200">
+      <h2 className="text-3xl font-bold text-center mb-4 text-gray-800">
         Reset Password
       </h2>
-      <form onSubmit={handleResetPassword} className="space-y-5">
+      <p className="text-center text-gray-500 mb-6">
+        Enter your new password below.
+      </p>
+
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label className="block text-sm text-gray-600 mb-1">
-            New Password
-          </label>
+          <label className="block text-sm text-gray-700 mb-1">New Password</label>
           <input
             type="password"
             placeholder="••••••••"
-            value={newPassword}
-            onChange={(e) => setNewPassword(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
             required
           />
         </div>
 
         <div>
-          <label className="block text-sm text-gray-600 mb-1">
-            Confirm Password
-          </label>
+          <label className="block text-sm text-gray-700 mb-1">Confirm Password</label>
           <input
             type="password"
             placeholder="••••••••"
@@ -87,12 +91,12 @@ export default function ResetPasswordPage() {
         </div>
 
         {error && <p className="text-sm text-red-500">{error}</p>}
-        {message && <p className="text-sm text-green-500">{message}</p>}
+        {success && <p className="text-sm text-green-500">{success}</p>}
 
         <button
           type="submit"
           disabled={loading || !token}
-          className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition disabled:opacity-50"
+          className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition disabled:opacity-50"
         >
           {loading ? "Updating..." : "Update Password"}
         </button>
