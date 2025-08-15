@@ -1,5 +1,5 @@
 // src/lib/controllers/productController.ts
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/db";
 import { Product } from "@prisma/client";
 
 type CreateProductData = Omit<Product, "id" | "createdAt" | "updatedAt">;

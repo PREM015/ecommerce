@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import crypto from "crypto";
-import { prisma } from "@/lib/prisma"; // adjust path if different
+import { prisma } from "@/lib/db"; // adjust path if different
 // import { sendResetEmail } from "@/lib/utils/mailer"; // optional
 
 export async function POST(req: Request) {

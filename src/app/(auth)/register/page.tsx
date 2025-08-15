@@ -232,10 +232,10 @@ export default function RegisterPage() {
             <h2 className="text-2xl font-bold mb-6 text-center">Select Your Avatar</h2>
             <div className="space-y-8">
               {avatarData.map((category) => (
-                <div key={category.title}>
-                  <h3 className="text-lg font-semibold text-gray-600 mb-3">{category.title}</h3>
+                <div key={category.name}>
+                  <h3 className="text-lg font-semibold text-gray-600 mb-3">{category.name}</h3>
                   <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-4">
-                    {category.avatars.map((avatar: AvatarImage) => (
+                    {category.images.map((avatar: AvatarImage) => (
                       <div
                         key={avatar.url}
                         onClick={() => handleAvatarSelect(avatar.url)}

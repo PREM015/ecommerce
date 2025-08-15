@@ -1,6 +1,6 @@
 // Review.ts
 // src/lib/models/Review.ts
-import { prisma } from "@/lib/prisma";
+import { prisma } from "@/lib/db";
 
 export const createReview = async (data: {
   userId: string;

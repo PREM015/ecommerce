@@ -1,7 +1,5 @@
-// validateInput.ts
-// src/lib/middleware/validateInput.ts
 import { NextRequest, NextResponse } from "next/server";
-import { ZodSchema } from "zod";
+import { ZodSchema, ZodError } from "zod";
 
 /**
  * Validates request body against a Zod schema
@@ -12,22 +10,16 @@ export function validateInput<T>(
   schema: ZodSchema<T>,
   handler: (req: NextRequest, data: T) => Promise<NextResponse>
 ) {
-  return async (req: NextRequest) => {
+  return async (req: NextRequest): Promise<NextResponse> => {
     try {
       const body = await req.json();
       const parsedData = schema.parse(body);
       return handler(req, parsedData);
-    } catch (err: any) {
-      if (err.name === "ZodError") {
-        return NextResponse.json(
-          { errors: err.errors },
-          { status: 400 }
-        );
+    } catch (err: unknown) {
+      if (err instanceof ZodError) {
+        return NextResponse.json({ errors: err }, { status: 400 });
       }
-      return NextResponse.json(
-        { error: "Invalid request" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
   };
 }

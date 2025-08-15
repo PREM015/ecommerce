@@ -3,6 +3,8 @@ import { prisma } from "@/lib/db";
 // Input type for creating an order
 export type CreateOrderInput = {
   userId: string;
+  userEmail: string; // Required by your Prisma schema
+  adminId: string;   // Required by your Prisma schema
   totalAmount: number;
   status?: "PENDING" | "SHIPPED" | "DELIVERED" | "CANCELLED";
   items: {
@@ -13,12 +15,13 @@ export type CreateOrderInput = {
   shippingAddress: string;
 };
 
+// Create a new order
 export const createOrder = async (orderData: CreateOrderInput) => {
   return await prisma.order.create({
     data: {
-      user: {
-        connect: { id: orderData.userId },
-      },
+      userId: orderData.userId,
+      userEmail: orderData.userEmail,
+      adminId: orderData.adminId,
       totalAmount: orderData.totalAmount,
       status: orderData.status ?? "PENDING",
       shippingAddress: orderData.shippingAddress,
@@ -40,22 +43,15 @@ export const createOrder = async (orderData: CreateOrderInput) => {
   });
 };
 
+// Get all orders for a user
 export const getUserOrders = async (userId: string) => {
   return await prisma.order.findMany({
-    where: {
-      user: {
-        id: userId,
-      },
-    },
+    where: { userId },
     include: {
       items: {
-        include: {
-          product: true,
-        },
+        include: { product: true },
       },
     },
-    orderBy: {
-      createdAt: "desc",
-    },
+    orderBy: { createdAt: "desc" },
   });
 };
