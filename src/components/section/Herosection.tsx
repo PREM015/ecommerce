@@ -44,7 +44,7 @@ const offers = [
   },
 ];
 
-export default function Herosection() {
+export default function HeroSection() {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {

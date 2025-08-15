@@ -1,7 +1,7 @@
 "use client";
 
 // import Link from "next/link";
-import Herosection from "@/components/section/HeroSection";
+import HeroSection from "@/components/section/HeroSection";
 import CategorySection from "@/components/section/CategorySection";
 import FeaturedProductsSection from "@/components/section/FeaturedProducts";
 import Trendingsection from "@/components/section/Trendingsection";
@@ -16,7 +16,7 @@ export default function Home() {
     <main className="w-full">
       {/* ✅ Hero Section */}
       <section id="home">
-        <Herosection />
+        <HeroSection />
       </section>
 
       {/* ✅ Category Section */}
