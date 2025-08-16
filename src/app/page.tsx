@@ -1,13 +1,15 @@
 "use client";
 
-import HeroSection from "@/components/section/HeroSection";
+
 import CategorySection from "@/components/section/CategorySection";
 import FeaturedProductsSection from "@/components/section/FeaturedProducts";
-import TrendingSection from "@/components/section/TrendingSection";
+
 import NewArrivals from "@/components/section/NewArrivals";
 import BrandsShowcase from "@/components/section/BrandsShowcase";
 import Newsletter from "@/components/section/Newsletter";
 import Chatbox from "@/components/ui/Chatbox";
+import HeroSection from "@/components/section/HeroSection";
+import TrendingSection from "@/components/section/TrendingSection";
 
 export default function Home() {
   return (
