@@ -1,7 +1,7 @@
 // src/app/(auth)/reset-password/page.tsx
 'use client';
 
-import ResetPasswordForm from '@/components/auth/reset-password/page';
+import ResetPasswordForm from '@/components/auth/reset-password/ResetPasswordForm';
 import { Suspense } from 'react';
 
 
