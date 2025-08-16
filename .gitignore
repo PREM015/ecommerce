@@ -53,3 +53,4 @@ prisma/migrations/
 temp.ts
 prisma/schema.prisma
 prisma/schema.prisma
+check.js
