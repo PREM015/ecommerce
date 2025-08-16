@@ -4,11 +4,11 @@
 import HeroSection from "@/components/section/HeroSection";
 import CategorySection from "@/components/section/CategorySection";
 import FeaturedProductsSection from "@/components/section/FeaturedProducts";
-import Trendingsection from "@/components/section/Trendingsection";
+import TrendingSection from "@/components/section/Trendingsection";
 import NewArrivals from "@/components/section/NewArrivals";
-import Chatbox from "@/components/ui/Chatbox";
 import BrandsShowcase from "@/components/section/BrandsShowcase";
 import Newsletter from "@/components/section/Newsletter";
+import Chatbox from "@/components/ui/Chatbox";
 
 
 export default function Home() {
@@ -31,7 +31,7 @@ export default function Home() {
 
       {/* ✅ Trending Products */}
       <section id="trending">
-        <Trendingsection />
+        <TrendingSection />
       </section>
 
       {/* ✅ New Arrivals */}
