@@ -1,4 +1,4 @@
-// src/components/section/Trendingsection.tsx
+
 'use client';
 
 import React from 'react';
