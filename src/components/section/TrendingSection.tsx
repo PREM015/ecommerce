@@ -67,3 +67,5 @@ const TrendingSection = () => {
 };
 
 export default TrendingSection;
+
+
