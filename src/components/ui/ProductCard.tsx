@@ -1,51 +1,53 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-
-interface Product {
-  id: number;
-  name: string;
-  price: number;
-  image: string;
-  slug?: string;
-}
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 interface ProductCardProps {
-  product: Product;
+  product: {
+    id: string;
+    title: string;
+    description: string;
+    price: number;
+    image: string;
+    stock: number;
+    isNew: boolean;
+    isFeatured: boolean;
+    brand: string | null;
+    rating: number;
+    discountPercentage: number;
+    categoryId: string;
+  };
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const [imgSrc, setImgSrc] = useState(product.image || '/images/ui/placeholder.png');
-
+const ProductCard = ({ product }: ProductCardProps) => {
   return (
-    <Link
-      href={`/products/${product.slug || product.id}`}
-      className="group relative flex flex-col rounded-2xl overflow-hidden bg-white border border-gray-200 hover:border-indigo-500 shadow-sm hover:shadow-lg transition-all duration-300"
+    <motion.div
+      whileHover={{ scale: 1.03 }}
+      transition={{ duration: 0.2 }}
+      className="bg-white shadow-md rounded-2xl p-4 hover:shadow-xl transition-all duration-300"
     >
-      <div className="relative w-full aspect-[4/5] bg-gray-100">
-        <Image
-          src={imgSrc}
-          alt={product.name}
-          fill
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-          sizes="(max-width: 768px) 100vw, 33vw"
-          onError={() => setImgSrc('/images/ui/placeholder.png')}
-        />
-      </div>
-
-      <div className="p-4 flex-1 flex flex-col justify-between gap-2">
-        <h3 className="text-sm sm:text-base font-semibold text-gray-800 group-hover:text-indigo-600 truncate">
-          {product.name}
-        </h3>
-        <div className="text-gray-900 font-bold text-sm sm:text-base">
-          ₹{product.price.toLocaleString()}
+      <Link href={`/product/${product.id}`}>
+        <div className="relative w-full h-48 mb-4">
+          <Image
+            src={product.image || "/images/placeholder.png"}
+            alt={product.title}
+            fill
+            className="object-cover rounded-xl"
+          />
         </div>
-      </div>
-
-      <div className="absolute inset-0 bg-gradient-to-br from-transparent to-indigo-100 opacity-0 group-hover:opacity-10 transition duration-300 pointer-events-none" />
-    </Link>
+        <div>
+          <h3 className="text-lg font-semibold truncate">{product.title}</h3>
+          <p className="text-sm text-gray-500 truncate">
+            {product.brand || "Unknown Brand"} • Cat ID: {product.categoryId}
+          </p>
+          <p className="mt-2 text-lg font-bold text-blue-600">
+            ₹{product.price.toLocaleString()}
+          </p>
+        </div>
+      </Link>
+    </motion.div>
   );
 };
 

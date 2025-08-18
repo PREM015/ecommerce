@@ -1,18 +1,19 @@
-'use client';
+// D:\code\projects\ecommerce\src\components\auth\register\RegisterPage.tsx
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion";
 
 export default function RegisterPage() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    name: '',
-    emailOrPhone: '',
-    password: '',
-    avatar: '',
+    name: "",
+    emailOrPhone: "",
+    password: "",
+    avatar: "",
   });
 
   const [avatars, setAvatars] = useState<
@@ -24,11 +25,11 @@ export default function RegisterPage() {
   useEffect(() => {
     const fetchAvatars = async () => {
       try {
-        const res = await fetch('/api/avatars');
+        const res = await fetch("/api/avatars");
         const data = await res.json();
         setAvatars(data.avatars || []);
       } catch (error) {
-        console.error('Failed to load avatars', error);
+        console.error("Failed to load avatars", error);
       }
     };
 
@@ -47,39 +48,54 @@ export default function RegisterPage() {
     setLoading(true);
 
     try {
-      const res = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (res.ok) {
-        router.push('/login');
+        router.push("/login");
       } else {
         const err = await res.json();
-        alert(err.message || 'Registration failed.');
+        alert(err.message || "Registration failed.");
       }
     } catch (error) {
-      console.error('Registration error:', error);
-      alert('An error occurred during registration.');
+      console.error("Registration error:", error);
+      alert("An error occurred during registration.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 via-purple-50 to-pink-100 p-6">
-      <div className="w-full max-w-lg bg-white rounded-3xl shadow-2xl p-10 relative">
-        <h2 className="text-4xl font-extrabold text-center text-gray-800 mb-6">
-          Create Your Account
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-700 via-pink-500 to-orange-400 p-6 relative overflow-hidden">
+      {/* Background floating blobs */}
+      <motion.div
+        className="absolute -top-24 -left-24 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse"
+      />
+      <motion.div
+        className="absolute -bottom-24 -right-24 w-72 h-72 bg-purple-400 rounded-full mix-blend-multiply filter blur-2xl opacity-70 animate-pulse"
+      />
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9, y: 30 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="w-full max-w-lg bg-white/20 backdrop-blur-xl border border-white/30 rounded-3xl shadow-2xl p-10 relative"
+      >
+        <h2 className="text-4xl font-extrabold text-center text-white drop-shadow-lg mb-6">
+          Create Your Account 
         </h2>
 
-        {/* Avatar Preview Button */}
+        {/* Avatar Preview */}
         <div className="flex justify-center mb-6">
-          <button
+          <motion.button
             type="button"
+            whileHover={{ scale: 1.1, rotate: 3 }}
+            whileTap={{ scale: 0.95 }}
             onClick={() => setShowAvatarModal(true)}
-            className="relative w-24 h-24 rounded-full border-4 border-blue-500 shadow-lg overflow-hidden hover:scale-105 transition-transform"
+            className="relative w-28 h-28 rounded-full border-4 border-white/70 shadow-xl overflow-hidden"
           >
             {formData.avatar ? (
               <Image
@@ -89,75 +105,78 @@ export default function RegisterPage() {
                 className="object-cover rounded-full"
               />
             ) : (
-              <div className="w-full h-full bg-gray-200 rounded-full flex items-center justify-center text-gray-500 text-sm">
-                Choose
+              <div className="w-full h-full bg-white/30 backdrop-blur-md rounded-full flex items-center justify-center text-white font-semibold">
+                +
               </div>
             )}
-          </button>
+          </motion.button>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <input
-            type="text"
-            name="name"
-            placeholder="Full Name"
-            value={formData.name}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {[
+            { name: "name", type: "text", label: "Full Name" },
+            { name: "emailOrPhone", type: "text", label: "Email or Phone" },
+            { name: "password", type: "password", label: "Password" },
+          ].map((field) => (
+            <motion.div
+              key={field.name}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+              className="relative"
+            >
+              <input
+                type={field.type}
+                name={field.name}
+                value={formData[field.name as keyof typeof formData]}
+                onChange={handleChange}
+                required
+                className="peer w-full px-4 py-3 bg-white/20 text-white placeholder-transparent border border-white/40 rounded-xl focus:outline-none focus:ring-2 focus:ring-pink-300 backdrop-blur-md"
+                placeholder={field.label}
+              />
+              <label
+                htmlFor={field.name}
+                className="absolute left-4 top-3 text-white/70 text-sm transition-all peer-placeholder-shown:top-3.5 peer-placeholder-shown:text-gray-300 peer-placeholder-shown:text-base peer-focus:top-1 peer-focus:text-xs peer-focus:text-pink-200"
+              >
+                {field.label}
+              </label>
+            </motion.div>
+          ))}
 
-          <input
-            type="text"
-            name="emailOrPhone"
-            placeholder="Email or Phone"
-            value={formData.emailOrPhone}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
-            required
-          />
-
-          <button
+          <motion.button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 text-white font-medium py-3 rounded-xl hover:bg-blue-700 transition-all shadow-md"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-full py-3 font-semibold rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white shadow-lg hover:shadow-2xl transition-all"
           >
-            {loading ? 'Creating Account...' : 'Register'}
-          </button>
+            {loading ? "Creating Account..." : "Register"}
+          </motion.button>
         </form>
 
-        <p className="text-sm text-center text-gray-600 mt-6">
-          Already have an account?{' '}
+        <p className="text-sm text-center text-white/80 mt-6">
+          Already have an account?{" "}
           <span
-            className="text-blue-600 hover:underline cursor-pointer"
-            onClick={() => router.push('/login')}
+            className="text-pink-200 font-semibold hover:underline cursor-pointer"
+            onClick={() => router.push("/login")}
           >
             Login
           </span>
         </p>
-      </div>
+      </motion.div>
 
       {/* Avatar Selection Modal */}
       <AnimatePresence>
         {showAvatarModal && (
           <motion.div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
             <motion.div
-              className="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto"
+              className="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-2xl max-h-[80vh] overflow-y-auto"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
@@ -186,8 +205,10 @@ export default function RegisterPage() {
                     </p>
                     <div className="flex flex-wrap gap-3">
                       {category.avatars.map((avatar) => (
-                        <div
+                        <motion.div
                           key={avatar.url}
+                          whileHover={{ scale: 1.15, rotate: 3 }}
+                          whileTap={{ scale: 0.95 }}
                           onClick={() => {
                             setFormData((prev) => ({
                               ...prev,
@@ -195,10 +216,10 @@ export default function RegisterPage() {
                             }));
                             setShowAvatarModal(false);
                           }}
-                          className={`relative w-16 h-16 rounded-full overflow-hidden border-2 cursor-pointer hover:scale-105 transition-transform ${
+                          className={`relative w-16 h-16 rounded-full overflow-hidden border-2 cursor-pointer transition-all ${
                             formData.avatar === avatar.url
-                              ? 'border-blue-600 ring-2 ring-blue-300'
-                              : 'border-gray-200'
+                              ? "border-pink-500 ring-2 ring-pink-300"
+                              : "border-gray-200"
                           }`}
                         >
                           <Image
@@ -207,7 +228,7 @@ export default function RegisterPage() {
                             fill
                             className="object-cover"
                           />
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </div>

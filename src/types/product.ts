@@ -1,19 +1,12 @@
 // src/types/product.ts
 export interface Product {
-  id: string; // 🔁 changed from number → string
+  id: string; // keep string since Prisma usually uses string/UUID
+  slug?: string; // for clean URLs
   name: string;
-  description: string;
+  description?: string;
   price: number;
-  discountPercentage: number;
-  rating: number;
   stock: number;
-  brand: string;
-  categoryId: string; // 🔁 changed from number → string
-  categoryName: string;
-  image: string;
-  imageUrl: string;
-  isNew: boolean;
-  isFeatured: boolean;
-  createdAt: string;
-  updatedAt: string;
+  image: string; // make it required (use placeholder when missing)
+  category?: { id: string; name: string };
+  brand?: { id: string; name: string };
 }
