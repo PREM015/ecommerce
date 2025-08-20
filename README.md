@@ -121,7 +121,7 @@ Suggestions & improvements are welcome!
 
 ## 📜 License
 
-MIT License © 2025 BharatCart
+MIT License © 2025 BharatCart.
 
 
 
